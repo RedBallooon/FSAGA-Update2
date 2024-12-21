@@ -131,12 +131,12 @@ Chương trình yêu cầu Python 3.x trở lên và các thư viện sau:
 ## Hình Ảnh
 
 
-### 1.**Nhập Ngày Bắt Đầu**
+### 1. **Nhập Ngày Bắt Đầu**
 ![Date Image](assets/date.png)
 
 
-### 2.**Kết Quả Lập Lịch và Lịch Được Lập**
+### 2. **Kết Quả Lập Lịch và Lịch Được Lập**
 ![Result Image](assets/result.png)
 
-### 3.**Lịch Được Hiển Thị**
+### 3. **Lịch Được Hiển Thị**
 ![Web Interface](assets/web2.png)
