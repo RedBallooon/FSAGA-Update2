@@ -11,20 +11,66 @@ Dự án này nhằm tối ưu hóa lịch học cho trường học hoặc đ�
 
 ## Cách Hoạt Động
 
-### 1. **Tải Dữ Liệu Đầu Vào**:
-Chương trình tải các dữ liệu về các lớp học, giảng viên, phòng học và thời gian từ các tệp CSV.
+## Các Thành Phần Chính
+1. **Lớp `Data`** - Quản lý và tải dữ liệu từ các file CSV (lớp học, giảng viên, phòng học, thời gian học).
+2. **Lớp `Solution`** - Đại diện cho một phương án thời khóa biểu và đánh giá độ "fitness" của lịch học.
+3. **Hàm `Crossover`** - Kết hợp hai phương án để tạo ra một phương án mới.
+4. **Hàm `Mutation`** - Đột biến một phương án để cải thiện kết quả.
+5. **Thuật toán Tìm kiếm Flamingo (FSA)** - Thuật toán tối ưu hóa metaheuristic tìm kiếm lịch học tối ưu.
+6. **Thêm Ngày vào Thời Khóa Biểu** - Thêm thông tin về ngày bắt đầu và kết thúc cho từng lớp học.
+7. **Ghi Thời Khóa Biểu vào File CSV** - Ghi kết quả vào file CSV.
 
-### 2. **Tạo Lịch Học Ban Đầu**:
-Chương trình tạo ra một lịch học ngẫu nhiên trong đó không có xung đột giữa các lớp học, phòng học và giảng viên. Mỗi lớp học sẽ được gán ngẫu nhiên một phòng học, một giảng viên, một ngày trong tuần và một khung giờ học.
+## Các Bước Thực Thi
 
-### 3. **Thuật Toán Flamingo Search**:
-Thuật toán **Flamingo Search Algorithm (FSA)** được sử dụng để tối ưu hóa lịch học ban đầu. Thuật toán này tìm kiếm giải pháp tối ưu bằng cách cân bằng giữa việc khám phá không gian giải pháp (exploration) và khai thác (exploitation), đảm bảo giải pháp vừa đa dạng vừa tối ưu.
+### 1. **Khởi Tạo Lớp `Data`**
+   - **Mục đích:** Tải và lưu trữ dữ liệu từ các file CSV chứa thông tin về các lớp học, giảng viên, phòng học, và thời gian học.
+   - **Phương thức:** 
+     - `__init__`: Khởi tạo đối tượng `Data`, gọi các phương thức để tải dữ liệu từ các file CSV.
+     - `load_csv`: Đọc dữ liệu từ các file CSV và lưu trữ vào các từ điển tương ứng, bao gồm thông tin về lớp học, giảng viên, phòng học, v.v.
+     - `load_time_slots`: Tải dữ liệu về các thời gian học từ một file CSV vào một danh sách. Dữ liệu này sẽ được sử dụng để gán thời gian cho các lớp học.
 
-### 4. **Tính Toán Ngày Bắt Đầu và Kết Thúc**:
-Chương trình tính toán ngày bắt đầu và kết thúc của mỗi lớp học dựa trên loại phòng học (Giảng dạy lý thuyết - LT, Thực hành - TH). Mỗi phòng LT có thời gian học kéo dài 15 tuần, trong khi TH bắt đầu muộn hơn và kéo dài 10 tuần.
+### 2. **Khởi Tạo Lớp `Solution`**
+   - **Mục đích:** Đại diện cho một lịch học và đánh giá độ "fitness" của lịch học đó dựa trên các yếu tố như xung đột giữa các lớp học, phòng học, giảng viên, và thời gian học.
+   - **Phương thức:**
+     - `__init__`: Khởi tạo đối tượng `Solution`, tính toán độ "fitness" ban đầu của lịch học.
+     - `generate_initial_schedule`: Tạo lịch học ngẫu nhiên bằng cách gán lớp học, giảng viên, phòng học, và thời gian học.
+     - `calculate_fitness`: Đánh giá độ "fitness" của lịch học dựa trên các tiêu chí như xung đột về phòng học, giảng viên và thời gian học. Mức độ "fitness" càng cao, lịch học càng tốt.
 
-### 5. **Xuất Lịch Học Cuối Cùng**:
-Lịch học đã được tối ưu hóa sẽ được lưu vào một tệp CSV, trong đó bao gồm thông tin về các lớp học, phòng học, giảng viên và thời gian học.
+### 3. **Crossover (Giao Phối)**
+   - **Mục đích:** Kết hợp hai phương án lịch học (từ hai đối tượng `Solution`) để tạo ra một phương án mới, giúp cải thiện lịch học.
+   - **Phương thức:** 
+     - Chọn một điểm cắt ngẫu nhiên trong lịch học của hai đối tượng và hoán đổi các phần tương ứng của chúng. Quá trình này tạo ra một lịch học mới, kết hợp các yếu tố tốt nhất từ cả hai phương án.
+
+### 4. **Mutation (Đột Biến)**
+   - **Mục đích:** Thực hiện đột biến trên một lịch học để cải thiện kết quả, tránh tình trạng quá trình tối ưu hóa bị dừng lại ở các phương án không tối ưu.
+   - **Phương thức:** 
+     - Đột biến ngẫu nhiên một lớp học trong lịch học, ví dụ thay đổi giảng viên, phòng học, hoặc thời gian học của lớp. Quá trình này tạo ra sự thay đổi nhỏ nhưng có thể giúp cải thiện độ "fitness" của lịch học.
+
+### 5. **Thuật Toán Tìm Kiếm Flamingo (FSA)**
+   - **Mục đích:** Thuật toán tối ưu hóa metaheuristic được sử dụng để tìm kiếm lịch học tối ưu trong không gian giải pháp.
+   - **Phương thức:** 
+     - Khởi tạo dân số ban đầu bằng cách tạo ra nhiều lịch học ngẫu nhiên.
+     - Tạo các thế hệ mới bằng cách áp dụng các phép toán `crossover` và `mutation` trên các lịch học.
+     - Đánh giá độ "fitness" của mỗi lịch học và lựa chọn các phương án tốt nhất để tạo thế hệ tiếp theo.
+     - Lặp lại quá trình này qua nhiều thế hệ cho đến khi tìm được lịch học tối ưu.
+
+### 6. **Thêm Ngày vào Thời Khóa Biểu**
+   - **Mục đích:** Thêm thông tin về ngày bắt đầu và ngày kết thúc cho từng lớp học để hoàn thiện thời khóa biểu.
+   - **Phương thức:** 
+     - Tính toán ngày bắt đầu và kết thúc cho từng lớp học dựa trên thông tin về loại lớp (lý thuyết hay thực hành).
+     - Lớp lý thuyết (LT) kéo dài 15 tuần, còn lớp thực hành (TH) kéo dài 10 tuần. Các ngày bắt đầu và kết thúc được gán cho từng lớp học dựa trên các quy định này.
+
+### 7. **Ghi Lịch Học vào File CSV**
+   - **Mục đích:** Lưu lịch học cuối cùng vào một file CSV để người dùng có thể dễ dàng tra cứu và sử dụng.
+   - **Phương thức:** 
+     - Ghi thông tin chi tiết của lịch học như lớp học, phòng học, giảng viên, thời gian học vào một file CSV. Điều này giúp người dùng có thể xem lại thời khóa biểu dễ dàng, đồng thời phục vụ cho các nhu cầu sau này như lưu trữ hoặc in ấn.
+
+### 8. **Xử Lý Lỗi**
+   - **Mục đích:** Đảm bảo chương trình hoạt động mượt mà và thông báo lỗi cho người dùng khi có vấn đề xảy ra trong quá trình tải dữ liệu hoặc tạo lịch học.
+   - **Phương thức:** 
+     - Nếu có lỗi khi tải các file CSV (ví dụ: file không tồn tại hoặc dữ liệu không hợp lệ), chương trình sẽ thông báo lỗi rõ ràng cho người dùng.
+     - Các lỗi khi tạo lịch học (ví dụ: xung đột về phòng học, giảng viên, hoặc thời gian học) sẽ được kiểm tra và xử lý tự động để đảm bảo lịch học được tạo ra là hợp lý.
+
 
 ## Hướng Dẫn Sử Dụng
 
