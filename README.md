@@ -113,7 +113,7 @@ Sau khi chương trình chạy xong, lịch học tối ưu sẽ được lưu v
 ![Result Image](assets/result.png)
 
 ### 3. **Web Image**
-![Web Interface](assets/web.png)
+![Web Interface](assets/web2.png)
 
 ### Bước 4: Tùy Chỉnh Hoặc Thay Đổi Tham Số
 Bạn có thể điều chỉnh các tham số của Flamingo Search Algorithm (ví dụ: kích thước quần thể, tỷ lệ đột biến, số thế hệ) để tinh chỉnh quá trình tối ưu hóa.
