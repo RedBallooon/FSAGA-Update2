@@ -1,4 +1,4 @@
-# Tối Ưu Hóa Lịch Học Với Thuật Toán Flamingo Search
+# Tối Ưu Hóa Lịch Giảng Dạy Với Thuật Toán Flamingo Search
 
 Dự án này nhằm tối ưu hóa lịch học cho trường học hoặc đại học bằng cách sử dụng **Flamingo Search Algorithm** (FSA). Chương trình tạo ra một lịch học ban đầu dựa trên các lớp học, giảng viên, phòng học và thời gian có sẵn, sau đó cải thiện lịch học này thông qua tối ưu hóa để giảm thiểu các xung đột (như xung đột về phòng học hoặc giảng viên).
 
