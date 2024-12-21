@@ -103,16 +103,16 @@ Bạn cần có bốn tệp CSV sau đây:
 5. Sau khi chương trình chạy, bạn sẽ được yêu cầu nhập ngày bắt đầu của học kỳ theo định dạng YYYY-MM-DD. Ví dụ:
    ```bash
    Vui lòng nhập ngày bắt đầu (YYYY-MM-DD): 2024-01-01
-1. **Nhập Ngày Bắt Đầu**
+**Nhập Ngày Bắt Đầu**
 ![Date Image](assets/date.png)
 
 ### Bước 3: Kiểm Tra Kết Quả
 Sau khi chương trình chạy xong, lịch học tối ưu sẽ được lưu vào một tệp CSV có tên `schedule.csv`.
 
-2. **Kết Quả Lập Lịch và Lịch Được Lập**
+**Kết Quả Lập Lịch và Lịch Được Lập**
 ![Result Image](assets/result.png)
 
-3. **Lịch Được Hiển Thị**
+**Lịch Được Hiển Thị**
 ![Web Interface](assets/web2.png)
 
 ### Bước 4: Tùy Chỉnh Hoặc Thay Đổi Tham Số
