@@ -103,17 +103,12 @@ Bạn cần có bốn tệp CSV sau đây:
 5. Sau khi chương trình chạy, bạn sẽ được yêu cầu nhập ngày bắt đầu của học kỳ theo định dạng YYYY-MM-DD. Ví dụ:
    ```bash
    Vui lòng nhập ngày bắt đầu (YYYY-MM-DD): 2024-01-01
-**Nhập Ngày Bắt Đầu**
-![Date Image](assets/date.png)
+
 
 ### Bước 3: Kiểm Tra Kết Quả
 Sau khi chương trình chạy xong, lịch học tối ưu sẽ được lưu vào một tệp CSV có tên `schedule.csv`.
 
-**Kết Quả Lập Lịch và Lịch Được Lập**
-![Result Image](assets/result.png)
 
-**Lịch Được Hiển Thị**
-![Web Interface](assets/web2.png)
 
 ### Bước 4: Tùy Chỉnh Hoặc Thay Đổi Tham Số
 Bạn có thể điều chỉnh các tham số của Flamingo Search Algorithm (ví dụ: kích thước quần thể, tỷ lệ đột biến, số thế hệ) để tinh chỉnh quá trình tối ưu hóa.
@@ -132,6 +127,16 @@ Chương trình yêu cầu Python 3.x trở lên và các thư viện sau:
 
    ```bash
    pip install -r requirements.txt
+```
 ##Hình Ảnh
 
 
+### 1.**Nhập Ngày Bắt Đầu**
+![Date Image](assets/date.png)
+
+
+### 2.**Kết Quả Lập Lịch và Lịch Được Lập**
+![Result Image](assets/result.png)
+
+### 3.**Lịch Được Hiển Thị**
+![Web Interface](assets/web2.png)
