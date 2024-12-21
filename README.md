@@ -42,9 +42,9 @@ Dự án này nhằm tối ưu hóa lịch giảng dạy cho trường học ho�
 
 ### 3. **Crossover (Giao Phối)**
    - Crossover là quá trình kết hợp hai lịch học từ hai phương án khác nhau để tạo ra một lịch học mới. Mục tiêu của crossover là kết hợp các yếu tố tốt từ cả hai lịch học để tạo ra một lịch học tốt hơn.
-     - **Chọn điểm cắt**: Chọn một điểm cắt ngẫu nhiên trong lịch học của hai phương án. Điểm cắt này sẽ xác định phần nào của lịch học sẽ được lấy từ mỗi phương án.
-     - **Kết hợp các phần**: Sau khi chọn điểm cắt, các phần từ hai lịch học sẽ được kết hợp lại. Một phần lịch học từ phương án đầu tiên sẽ được ghép nối với phần từ phương án thứ hai để tạo thành một lịch học mới.
-     - **Đảm bảo tính hợp lệ**: Sau khi crossover, lịch học mới sẽ được kiểm tra xem có các xung đột về phòng học, giảng viên, hay thời gian hay không. Nếu có, chúng sẽ được xử lý để tạo ra một lịch học hợp lệ.
+     - **`Chọn điểm cắt`**: Chọn một điểm cắt ngẫu nhiên trong lịch học của hai phương án. Điểm cắt này sẽ xác định phần nào của lịch học sẽ được lấy từ mỗi phương án.
+     - **`Kết hợp các phần`**: Sau khi chọn điểm cắt, các phần từ hai lịch học sẽ được kết hợp lại. Một phần lịch học từ phương án đầu tiên sẽ được ghép nối với phần từ phương án thứ hai để tạo thành một lịch học mới.
+     - **`Đảm bảo tính hợp lệ`**: Sau khi crossover, lịch học mới sẽ được kiểm tra xem có các xung đột về phòng học, giảng viên, hay thời gian hay không. Nếu có, chúng sẽ được xử lý để tạo ra một lịch học hợp lệ.
 
 ### 4. **Mutation (Đột Biến)**
    - Mutation giúp tạo ra sự thay đổi ngẫu nhiên trong lịch học để tránh bị rơi vào "local optimum" (tối ưu cục bộ). Quá trình này sẽ thay đổi một số yếu tố trong lịch học, chẳng hạn như thời gian học, phòng học, hoặc giảng viên.   
