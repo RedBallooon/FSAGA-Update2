@@ -6,7 +6,7 @@ Dự án này nhằm tối ưu hóa lịch giảng dạy cho trường học ho�
 1. [Cách Hoạt Động](#cách-hoạt-động)
 2. [Hướng Dẫn Sử Dụng](#hướng-dẫn-sử-dụng)
 3. [Yêu Cầu Hệ Thống](#yêu-cầu-hệ-thống)
-
+4. [Hình Ảnh](#hình-ảnh)
 
 
 ## Cách Hoạt Động
@@ -130,6 +130,8 @@ Chương trình yêu cầu Python 3.x trở lên và các thư viện sau:
 
 Để cài đặt các thư viện yêu cầu, bạn chỉ cần sử dụng file `requirements.txt`. Chạy lệnh sau trong terminal hoặc command prompt:
 
-```bash
-pip install -r requirements.txt
+   ```bash
+   pip install -r requirements.txt
+##Hình Ảnh
+
 
