@@ -11,7 +11,7 @@ Dự án này nhằm tối ưu hóa lịch học cho trường học hoặc đ�
 
 ## Cách Hoạt Động
 
-## Các Thành Phần Chính
+### Các Thành Phần Chính
 1. **Lớp `Data`** - Quản lý và tải dữ liệu từ các file CSV (lớp học, giảng viên, phòng học, thời gian học).
 2. **Lớp `Solution`** - Đại diện cho một phương án thời khóa biểu và đánh giá độ "fitness" của lịch học.
 3. **Hàm `Crossover`** - Kết hợp hai phương án để tạo ra một phương án mới.
