@@ -3,6 +3,7 @@ import random
 import math
 import pandas as pd 
 from datetime import datetime, timedelta
+
 class Data:
     def __init__(self, class_file, instructor_file, room_file, schedule_file=None, tiethoc_file=None):
         self.classes = self.load_csv(class_file, 'class_id')
@@ -20,9 +21,9 @@ class Data:
                     key = int(row[id_field])
                     data[key] = row
         except FileNotFoundError:
-            print(f"File not found: {file_path}")
+            print(f"Tệp tin không tìm thấy: {file_path}")
         except Exception as e:
-            print(f"Error loading CSV file {file_path}: {e}")
+            print(f"Lỗi khi tải tệp CSV {file_path}: {e}")
         return data
 
     def load_time_slots(self, file_path):
@@ -33,9 +34,9 @@ class Data:
                 for row in csv_reader:
                     time_slots.append(row)
         except FileNotFoundError:
-            print(f"File not found: {file_path}")
+            print(f"Tệp tin không tìm thấy: {file_path}")
         except Exception as e:
-            print(f"Error loading CSV file {file_path}: {e}")
+            print(f"Lỗi khi tải tệp CSV {file_path}: {e}")
         return time_slots
 
 class Solution:
@@ -144,23 +145,23 @@ def mutate(individual, mutation_rate=0.1):
     return Solution(individual.data, mutated_schedule)
 
 def add_dates(df, start_date_str):
-    # Convert the start date string to a datetime object
+    # Chuyển đổi chuỗi ngày bắt đầu thành đối tượng datetime
     start_date = datetime.strptime(start_date_str, "%Y-%m-%d")
     
-    # Initialize columns for start and end dates
+    # Khởi tạo các cột cho ngày bắt đầu và ngày kết thúc
     df['Ngày Bắt Đầu'] = None
     df['Ngày Kết Thúc'] = None
     
     for i, row in df.iterrows():
         if row['room_type'] == 'LT':
-            # LT starts on the start_date and lasts for 15 weeks
+            # LT bắt đầu vào ngày bắt đầu và kéo dài 15 tuần
             lt_start = start_date
             lt_end = lt_start + timedelta(weeks=15)
             df.at[i, 'Ngày Bắt Đầu'] = lt_start.date()
             df.at[i, 'Ngày Kết Thúc'] = lt_end.date()
         elif row['room_type'] == 'TH':
-            # TH starts 6 weeks after LT and lasts for 10 weeks
-            lt_start = start_date  # LT start date
+            # TH bắt đầu 6 tuần sau LT và kéo dài 10 tuần
+            lt_start = start_date  # Ngày bắt đầu LT
             th_start = lt_start + timedelta(weeks=6)
             th_end = th_start + timedelta(weeks=10)
             df.at[i, 'Ngày Bắt Đầu'] = th_start.date()
@@ -169,19 +170,19 @@ def add_dates(df, start_date_str):
     return df
 
 def flamingo_search_algorithm(data, population_size=50, generations=1000, mutation_rate=0.1):
-    # Initialize population
+    # Khởi tạo quần thể
     population = [Solution(data) for _ in range(population_size)]
     population.sort(key=lambda x: x.fitness)
 
-    # FSA parameters
-    alpha = 0.5  # Relative importance of exploration vs. exploitation
-    beta = 0.5   # Relative importance of the individual vs. the group
+    # Tham số FSA
+    alpha = 0.5  # Tầm quan trọng tương đối của khám phá so với khai thác
+    beta = 0.5   # Tầm quan trọng tương đối của cá nhân so với nhóm
 
     for generation in range(generations):
-        # FSA update
+        # Cập nhật FSA
         new_population = []
         for i in range(population_size):
-            # Flamingo search
+            # Tìm kiếm Flamingo
             leader = random.choice(population[:10])
             new_schedule = leader.schedule[:]
             for _ in range(random.randint(1, len(new_schedule))):
@@ -190,26 +191,25 @@ def flamingo_search_algorithm(data, population_size=50, generations=1000, mutati
                                        new_schedule[index][1], 
                                        random.choice(list(data.rooms.keys())),
                                        random.choice(["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7"]),
-                                       
                                        random.choice([slot['TietTrongKhungGio'] for slot in data.time_slots]),
                                        random.choice(list(data.instructors.keys())))
             new_population.append(Solution(data, new_schedule))
         
-        # Evaluate new population
+        # Đánh giá quần thể mới
         population.extend(new_population)
         population = sorted(population, key=lambda x: x.fitness)[:population_size]
 
-        print(f"Generation {generation + 1} - Best Fitness: {population[0].fitness}")
+        print(f"Thế hệ {generation + 1} - Fitness Tốt Nhất: {population[0].fitness}")
         if population[0].fitness == 0:
-            print("Optimal schedule found.")
+            print("Lịch học tối ưu đã được tìm thấy.")
             break
 
     best_solution = population[0]
-    print("Best Schedule:")
+    print("Lịch học tốt nhất:")
     for entry in best_solution.schedule:
         course_id, class_id, room_id, day, timeslot, instructor_id = entry
-        instructor_name = data.instructors.get(instructor_id, {}).get('fullname', 'Unknown')
-        print(f"Course ID: {course_id}, Class ID: {class_id}, Room ID: {room_id}, Day: {day}, Timeslot: {timeslot}, Instructor ID: {instructor_id}, Instructor Name: {instructor_name} ")
+        instructor_name = data.instructors.get(instructor_id, {}).get('fullname', 'Không xác định')
+        print(f"Mã khóa học: {course_id}, Mã lớp học: {class_id}, Mã phòng học: {room_id}, Ngày: {day}, Thời gian: {timeslot}, Mã giảng viên: {instructor_id}, Tên giảng viên: {instructor_name} ")
     print("Fitness:", best_solution.fitness)
 
     return best_solution
@@ -232,7 +232,6 @@ def flamingo_search_algorithm(data, population_size=50, generations=1000, mutati
 #         print(f"Error writing schedule to {file_path}: {e}")
 
 
-
 def write_schedule_to_csv(file_path, schedule, data, start_date_str):
     start_date = datetime.strptime(start_date_str, "%Y-%m-%d")
 
@@ -243,13 +242,13 @@ def write_schedule_to_csv(file_path, schedule, data, start_date_str):
 
             for entry in schedule:
                 course_id, class_id, room_id, day, timeslot, instructor_id = entry
-                instructor_name = data.instructors.get(instructor_id, {}).get('fullname', 'Unknown')
+                instructor_name = data.instructors.get(instructor_id, {}).get('fullname', 'Không xác định')
                 room_info = data.rooms.get(room_id, {})
-                room_name = room_info.get('name', 'Unknown')
-                room_type = room_info.get('type', 'Unknown')
-                room_capacity = room_info.get('capacity', 'Unknown')
+                room_name = room_info.get('name', 'Không xác định')
+                room_type = room_info.get('type', 'Không xác định')
+                room_capacity = room_info.get('capacity', 'Không xác định')
 
-                # Calculate start_date and end_date based on room_type
+                # Tính toán ngày bắt đầu và kết thúc dựa trên loại phòng
                 if room_type == 'LT':
                     lt_start = start_date
                     lt_end = lt_start + timedelta(weeks=15)
@@ -262,19 +261,16 @@ def write_schedule_to_csv(file_path, schedule, data, start_date_str):
                     start_date_val = th_start.date()
                     end_date_val = th_end.date()
                 else:
-                    start_date_val = 'Unknown'
-                    end_date_val = 'Unknown'
+                    start_date_val = 'Không xác định'
+                    end_date_val = 'Không xác định'
 
                 csv_writer.writerow([course_id, class_id, room_id, room_name, room_type, room_capacity, day, timeslot, instructor_id, instructor_name, start_date_val, end_date_val])
 
-        print(f"Successfully wrote schedule to {file_path}")
+        print(f"Đã ghi lịch học thành công vào {file_path}")
     except Exception as e:
-        print(f"Error writing schedule to {file_path}: {e}")
+        print(f"Lỗi khi ghi lịch học vào {file_path}: {e}")
 
-
-
-
-# Main execution
+# Hàm chính
 def main():
     class_file = 'classes.csv'
     instructor_file = 'instructors.csv'
@@ -282,7 +278,7 @@ def main():
     tiethoc_file = 'timeslots.csv'
     schedule_file = None  
 
-    # Input the start date from the user
+    # Nhập ngày bắt đầu từ người dùng
     chosen_start_date = input("Vui lòng nhập ngày bắt đầu (YYYY-MM-DD): ")
 
     data = Data(class_file, instructor_file, room_file, schedule_file, tiethoc_file)
@@ -292,20 +288,20 @@ def main():
     file_path = 'schedule.csv'
     write_schedule_to_csv(file_path, best_solution.schedule, data, chosen_start_date)
 
-    # Load the newly created schedule CSV
+    # Tải tệp CSV lịch học mới tạo
     df = pd.read_csv(file_path)
 
-    # Add the calculated dates
+    # Thêm ngày đã tính toán
     df_with_dates = add_dates(df, chosen_start_date)
 
-    # Save the updated dataframe to a new CSV file
+    # Lưu dataframe đã cập nhật vào tệp CSV mới
     df_with_dates.to_csv(file_path, index=False)
-
-    # print(df_with_dates)
-
 
 if __name__ == "__main__":
     main()
+
+
+
 
 
 
