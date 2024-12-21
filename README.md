@@ -128,7 +128,7 @@ Chương trình yêu cầu Python 3.x trở lên và các thư viện sau:
    ```bash
    pip install -r requirements.txt
 ```
-##Hình Ảnh
+## Hình Ảnh
 
 
 ### 1.**Nhập Ngày Bắt Đầu**
