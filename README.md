@@ -32,8 +32,7 @@ Dự án này nhằm tối ưu hóa lịch học cho trường học hoặc đ�
    - Những dữ liệu này sẽ được sử dụng trong các bước tiếp theo để phân phối các lớp học vào các phòng và thời gian học thích hợp.
 
 ### 2. **Khởi Tạo Lớp `Solution`**
-   - Khi lớp `Solution` được khởi tạo, nó sẽ đại diện cho một phương án lịch học cụ thể. Cơ bản, nó là một lịch học đã được phân bổ ngẫu nhiên, nơi các lớp học, giảng viên, phòng học, và thời gian học đã được gán cho nhau.
-   - Quá trình này diễn ra như sau:
+   - Khi lớp `Solution` được khởi tạo, nó sẽ đại diện cho một phương án lịch học cụ thể. Cơ bản, nó là một lịch học đã được phân bổ ngẫu nhiên, nơi các lớp học, giảng viên, phòng học, và thời gian học đã được gán cho nhau.   
      - **Tạo lịch học ngẫu nhiên**: Lịch học sẽ được tạo ra một cách ngẫu nhiên, nơi mỗi lớp học sẽ được phân bổ một phòng học, một giảng viên và một thời gian học cụ thể. Quá trình này đảm bảo rằng các lớp học không xung đột về phòng học, giảng viên và thời gian.
      - **Tính toán độ "fitness"**: Sau khi lịch học được tạo ra, hệ thống sẽ tính toán độ "fitness" của lịch học này. Độ "fitness" là chỉ số đo lường mức độ tối ưu của lịch học, tính theo các yếu tố như:
        - **Xung đột về phòng học**: Hai lớp học không thể diễn ra cùng một lúc trong một phòng học.
@@ -43,22 +42,19 @@ Dự án này nhằm tối ưu hóa lịch học cho trường học hoặc đ�
 
 ### 3. **Crossover (Giao Phối)**
    - Crossover là quá trình kết hợp hai lịch học từ hai phương án khác nhau để tạo ra một lịch học mới. Mục tiêu của crossover là kết hợp các yếu tố tốt từ cả hai lịch học để tạo ra một lịch học tốt hơn.
-   - Quá trình crossover hoạt động theo các bước sau:
      - **Chọn điểm cắt**: Chọn một điểm cắt ngẫu nhiên trong lịch học của hai phương án. Điểm cắt này sẽ xác định phần nào của lịch học sẽ được lấy từ mỗi phương án.
      - **Kết hợp các phần**: Sau khi chọn điểm cắt, các phần từ hai lịch học sẽ được kết hợp lại. Một phần lịch học từ phương án đầu tiên sẽ được ghép nối với phần từ phương án thứ hai để tạo thành một lịch học mới.
      - **Đảm bảo tính hợp lệ**: Sau khi crossover, lịch học mới sẽ được kiểm tra xem có các xung đột về phòng học, giảng viên, hay thời gian hay không. Nếu có, chúng sẽ được xử lý để tạo ra một lịch học hợp lệ.
 
 ### 4. **Mutation (Đột Biến)**
-   - Mutation giúp tạo ra sự thay đổi ngẫu nhiên trong lịch học để tránh bị rơi vào "local optimum" (tối ưu cục bộ). Quá trình này sẽ thay đổi một số yếu tố trong lịch học, chẳng hạn như thời gian học, phòng học, hoặc giảng viên.
-   - Các bước thực hiện mutation như sau:
+   - Mutation giúp tạo ra sự thay đổi ngẫu nhiên trong lịch học để tránh bị rơi vào "local optimum" (tối ưu cục bộ). Quá trình này sẽ thay đổi một số yếu tố trong lịch học, chẳng hạn như thời gian học, phòng học, hoặc giảng viên.   
      - **Chọn ngẫu nhiên một lớp học**: Lớp học sẽ được chọn ngẫu nhiên để thực hiện đột biến.
      - **Thực hiện thay đổi**: Sau khi chọn lớp học, các yếu tố như giảng viên, phòng học hoặc thời gian học của lớp đó sẽ được thay đổi ngẫu nhiên. Ví dụ, có thể thay đổi thời gian học của lớp học hoặc chuyển lớp học sang một phòng học khác.
      - **Kiểm tra hợp lệ**: Sau khi thực hiện thay đổi, hệ thống sẽ kiểm tra lại lịch học xem có xung đột hay không. Nếu có, sẽ thực hiện một đột biến khác để đảm bảo tính hợp lệ.
 
 ### 5. **Thuật Toán Tìm Kiếm Flamingo (FSA)**
    - Thuật toán Tìm kiếm Flamingo (FSA) là một thuật toán tối ưu hóa metaheuristic được sử dụng để tìm ra lịch học tối ưu.
-   - Thuật toán này bắt đầu với một dân số các lịch học ngẫu nhiên. Sau đó, các lịch học này sẽ được đánh giá về độ "fitness".
-   - Quá trình thực hiện FSA diễn ra như sau:
+   - Thuật toán này bắt đầu với một dân số các lịch học ngẫu nhiên. Sau đó, các lịch học này sẽ được đánh giá về độ "fitness".   
      - **Khởi tạo dân số**: Ban đầu, dân số các lịch học sẽ được tạo ngẫu nhiên. Mỗi lịch học này sẽ có độ "fitness" ban đầu được tính toán.
      - **Lặp lại các thế hệ**: Thuật toán sẽ tạo ra các thế hệ tiếp theo thông qua việc áp dụng các phương pháp crossover và mutation. Sau mỗi thế hệ, các lịch học sẽ được đánh giá lại và chọn ra những phương án có độ "fitness" cao để tạo ra thế hệ tiếp theo.
      - **Tiến hóa**: Các lịch học trong dân số sẽ liên tục thay đổi qua các thế hệ, ngày càng tối ưu hơn cho đến khi đạt được một lịch học không còn thay đổi đáng kể về độ "fitness".
